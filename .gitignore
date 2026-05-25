@@ -1,0 +1,67 @@
+## Visual Studio / .NET
+*.user
+*.suo
+.vs/
+*.log
+*.lock.json
+
+## Build outputs
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+!default.props
+.packages
+
+## EF Core Migrations (NO ignorar: se versionan con el proyecto)
+# src/**/Migrations/ ← NO ignorar
+
+## Secrets / Config locales
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+!appsettings.Production.json
+*.pfx
+*.pem
+*.key
+secrets.json
+.env
+.env.*
+!.env.example
+
+## Frontend (Next.js)
+node_modules/
+.next/
+out/
+.vercel
+
+## IDE
+.idea/
+*.DotSettings.user
+.vscode/settings.json
+.vscode/launch.json
+
+## OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+## Test coverage / results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+test-results/
+playwright-report/
+
+## Claude Code / herramientas de desarrollo (no parte del proyecto)
+claude-template/
+.mcp.json
+.claude/
+.claude-instructions.md
