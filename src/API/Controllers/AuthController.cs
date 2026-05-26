@@ -73,12 +73,12 @@ public class AuthController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out var userId))
+            return Unauthorized();
+
         var validation = await _changePasswordValidator.ValidateAsync(request, cancellationToken);
         if (!validation.IsValid)
             return UnprocessableEntity(validation.Errors.Select(e => e.ErrorMessage));
-
-        if (!Guid.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out var userId))
-            return Unauthorized();
         var result = await _authService.ChangePasswordAsync(userId, request.CurrentPassword, request.NewPassword, cancellationToken);
         // Se normalizan todos los fallos a 400 para no revelar existencia de usuario ni detalles internos en este flujo sensible.
         return result.IsSuccess ? Ok(new { message = "Contraseña actualizada correctamente." }) : BadRequest(new { result.ErrorMessage });

@@ -28,8 +28,8 @@ public class ProfessorsController : ControllerBase
         [FromQuery] string? search = null,
         CancellationToken cancellationToken = default)
     {
-        if (page < 1 || pageSize < 1 || pageSize > 100)
-            return BadRequest(new { error = "page debe ser >= 1; pageSize entre 1 y 100." });
+        page     = Math.Max(1, page);
+        pageSize = Math.Clamp(pageSize, 1, 100);
         var result = await _professorService.GetAllAsync(page, pageSize, search, cancellationToken);
         return Ok(result.Data);
     }

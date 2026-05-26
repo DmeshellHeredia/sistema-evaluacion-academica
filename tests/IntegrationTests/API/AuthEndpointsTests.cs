@@ -247,29 +247,6 @@ public class AuthEndpointsTests : IntegrationTestBase
 
     [Theory]
     [InlineData(0, 10)]
-    [InlineData(-1, 10)]
-    [InlineData(1, 0)]
-    [InlineData(1, -1)]
-    [InlineData(1, 101)]
-    public async Task Students_GetAll_WithInvalidPageParams_Returns400(int page, int pageSize)
-    {
-        var client   = CreateAuthenticatedClient("Admin");
-        var response = await client.GetAsync($"/api/students?page={page}&pageSize={pageSize}");
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
-
-    [Theory]
-    [InlineData(0, 10)]
-    [InlineData(1, 101)]
-    public async Task Professors_GetAll_WithInvalidPageParams_Returns400(int page, int pageSize)
-    {
-        var client   = CreateAuthenticatedClient("Admin");
-        var response = await client.GetAsync($"/api/professors?page={page}&pageSize={pageSize}");
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
-
-    [Theory]
-    [InlineData(0, 10)]
     [InlineData(1, 101)]
     public async Task Sections_GetAll_WithInvalidPageParams_Returns400(int page, int pageSize)
     {

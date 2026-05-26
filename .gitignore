@@ -59,9 +59,3 @@ coverage/
 *.coveragexml
 test-results/
 playwright-report/
-
-## Claude Code / herramientas de desarrollo (no parte del proyecto)
-claude-template/
-.mcp.json
-.claude/
-.claude-instructions.md

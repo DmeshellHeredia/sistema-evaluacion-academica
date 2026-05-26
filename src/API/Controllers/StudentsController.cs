@@ -43,8 +43,8 @@ public class StudentsController : ApiControllerBase
         [FromQuery] string? search = null,
         CancellationToken cancellationToken = default)
     {
-        if (page < 1 || pageSize < 1 || pageSize > 100)
-            return BadRequest(new { error = "page debe ser >= 1; pageSize entre 1 y 100." });
+        page     = Math.Max(1, page);
+        pageSize = Math.Clamp(pageSize, 1, 100);
         var result = await _studentService.GetAllAsync(page, pageSize, search, cancellationToken);
         return result.IsSuccess
             ? Ok(result.Data)
